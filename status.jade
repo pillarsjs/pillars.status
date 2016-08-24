@@ -1,0 +1,134 @@
+mixin propList(collection)
+  table.table.table-hover.table-condensed.table-bordered
+    tr
+      th.col-md-2 Property
+      th.col-md-1 Type
+      th Value
+    each v,i in collection
+      if typeof v !== 'function'
+        tr
+          td=i
+          td: em=(v && v.constructor?v.constructor.name:typeof v)
+            if v && typeof v === 'object'
+              td
+                div.table-responsive
+                  table.table.table-hover.table-condensed.table-bordered
+                    tr
+                      th.col-md-2 Property
+                      th.col-md-1 Type
+                      th Value
+                    each v2,i2 in v
+                      if typeof v !== 'function'
+                        tr
+                          td=i2
+                          td: em=(typeof v2)
+                          td: em=v2
+            else
+              td: em=v
+
+doctype html
+html(lang=gw.language)
+  head
+    title Status
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", crossorigin="anonymous")
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css", integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r", crossorigin="anonymous")
+    style.
+      .table>tbody>tr>td>.table-responsive {
+        margin: -6px;
+      }
+      .table>tbody>tr>td>.table-responsive>.table {
+        table-layout: fixed;
+      }
+      .table>tbody>tr>td {
+        word-wrap: break-word;
+      }
+
+  body
+    .container
+      header
+        h1 Pillars.js Status Panel
+      #page
+
+        .panel.panel-default
+          .panel-heading
+            h2.panel-title Pillars
+          .panel-body pillars main basics
+          +propList(pillars)
+        
+        .panel.panel-default
+          .panel-heading
+            h2.panel-title Process
+          .panel-body process info
+          +propList(process)
+
+        hr
+        hr
+
+        .panel.panel-default
+          .panel-heading
+            h2.panel-title Configuration
+          .panel-body pillars.config
+          +propList(pillars.config)
+
+        .panel.panel-default
+          .panel-heading
+            h2.panel-title Cache
+          .panel-body pillars.cache
+          +propList(pillars.cache)
+
+        .panel.panel-default
+          .panel-heading
+            h2.panel-title Routes
+          .panel-body pillars.routes
+          each route in pillars.routes
+            .panel-body: h3=route.id
+            +propList(route)
+            br
+
+        .panel.panel-default
+          .panel-heading
+            h2.panel-title Plugins
+          .panel-body pillars.plugins
+          each plugin in pillars.plugins
+            .panel-body: h3=plugin.id
+            +propList(plugin)
+            br
+
+        .panel.panel-default
+          .panel-heading
+            h2.panel-title Services
+          .panel-body pillars.services
+          each service in pillars.services
+            .panel-body: h3=service.id
+            +propList(service)
+            br
+
+        .panel.panel-default
+          .panel-heading
+            h2.panel-title Templated
+          .panel-body pillars.templated
+          +propList(pillars.templated)
+
+        .panel.panel-default
+          .panel-heading
+            h2.panel-title Textualization (i18n)
+          .panel-body pillars.i18n
+          +propList(pillars.i18n)
+
+        .panel.panel-default
+          .panel-heading
+            h2.panel-title Scheduled
+          .panel-body pillars.scheduled
+          +propList(pillars.scheduled)
+
+        .panel.panel-default
+          .panel-heading
+            h2.panel-title Crier
+          .panel-body pillars.crier
+          +propList(pillars.crier)
+
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js", integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS", crossorigin="anonymous")

@@ -1,0 +1,13 @@
+{
+  "name": "pillars.status",
+  "description": "Pillars.js status panel",
+  "version": "0.0.1",
+  "author": {
+    "name": "Javier Gallego Martín",
+    "email": "bifuer@gmail.com"
+  },
+  "dependencies": {
+  },
+  "main": "./index.js",
+  "license": "MIT"
+}
